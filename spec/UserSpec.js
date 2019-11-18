@@ -7,6 +7,7 @@ describe('User', function(){
       let = surname = "Doe";
       let = email = "JohnDoe@Gmail.com"
       let = password = "John123"
+      let = confirmedPassword = "John123"
       user = new User();
     });
 
@@ -21,12 +22,11 @@ describe('User', function(){
   describe('Sign Up',function(){
     it('Can be an instance of User', function(){
 
-      user.signUp(firstName, surname, email, password);
+      user.signUp(firstName, surname, email, password, confirmedPassword);
       expect(user.firstName).toEqual("John");
       expect(user.surname).toEqual("Doe");
       expect(user.email).toEqual("JohnDoe@Gmail.com");
       expect(user.password).toEqual("John123");
     });
   });
-
 });
