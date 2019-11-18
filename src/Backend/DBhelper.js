@@ -13,10 +13,8 @@ function query(statement, callback) {
     if (err) throw err;
   });
 
-  const result = connection.query(statement, callback);
+  connection.query(statement, callback);
   connection.end();
-
-  return result;
 }
 
 module.exports = {
