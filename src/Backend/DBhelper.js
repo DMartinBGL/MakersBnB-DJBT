@@ -1,18 +1,24 @@
 const mysql = require('mysql');
 
-var connection;
+const connection = mysql.createConnection({
+    host: 'database-3.cdqdrq2hjhze.eu-west-2.rds.amazonaws.com',
+    user: 'admin',
+    password: 'thelegend27',
+    database: 'makersbnb'
+});
 
-function connect(){
-      
-  });
-
+// auto closes connection
+function query(statement, callback) {
   connection.connect((err) => {
     if (err) throw err;
-    console.log('Connected!');
   });
+
+  const result = connection.query(statement, callback);
+  connection.end();
+
+  return result;
 }
 
-function insert(user){
-  connection.query(`INSERT INTO User (firstname, lastname, email, password) VALUES (${user.firstname}, ${user.surname}, ${user.email}, ${user.password})`)
-}
-
+module.exports = {
+  query: query
+};
