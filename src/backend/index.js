@@ -1,8 +1,21 @@
-const express = require('express')
+const express = require('express');
 const app = express();
+const path = require('path');
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.render('index', {
+    name: 'suprise'
+  });
+});
+
+app.get('/login', (req, res) => {
+  res.send('login page')
+});
+
+app.get('/register', (req, res) => {
+  res.send('registration page')
 });
 
 app.listen(8000, () => {
