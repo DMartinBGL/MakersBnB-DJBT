@@ -1,9 +1,15 @@
+//Class which stores the user information
+
 class User{
   constructor(){
-    var id;
     var firstName;
     var surname;
-    var emailAddress;
+    var email;
     var password;
+  }
+
+
+  signUp(){
+    
   }
 };
