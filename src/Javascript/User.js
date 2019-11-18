@@ -1,52 +1,29 @@
-import { createConnection } from 'mysql';
-//Class which stores the user information
-class User{
-  //defines the class variables
-  
-  constructor(){
-    this.firstName;
-    this.surname;
-    this.email;
-    this.password;
+const { query } = require('../Backend/DBhelper');
 
-    this.connection = createConnection({
-      host: 'database-3.cdqdrq2hjhze.eu-west-2.rds.amazonaws.com',
-      user: 'admin',
-      password: 'thelegend27',
-      database: 'makersbnb'
-    });
-    this.connection.connect((err) => {
-      if (err) throw err;
-      console.log('Connected!');
-    });
-
+class User {
+  constructor(id, firstName, lastName, email) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
   }
 
-  //Password validation function
-  passwordEqual(password, confirmPassword){
-    return true
-  }
-
-/*
-Sign up function takes in user information,
-sets the class variables to that information,
-will then send this information to the DBHelper
-*/
-  signUp(firstName, surname, email, password, confirmPassword)
-  {
-    if (this.passwordEqual(password,confirmPassword)){
-      this.firstName = firstName;
-      this.surname = surname;
-      this.email = email;
-      this.password = password;
-
-      
-      connection.query(`INSERT INTO User (firstname, lastname, email, password) VALUES (${this.firstname}, ${this.surname}, ${this.email}, ${this.password})`,(err) => {
-        if(err) throw err;
-      });
-
+  /*
+  Sign up function takes in user information,
+  if registeration is successful, an instance of,
+  user will be returned, otherwise an error is thrown
+  */
+  static register(firstName, lastName, email, password, confirmPassword) {
+    if (password === confirmPassword){
+      query(
+        `INSERT INTO User (firstname, lastname, email, password)
+        VALUES ('${firstName}', '${lastName}', '${email}', '${password}');`,
+        (err, res) => {
+          if (err) throw err;
+          else return new User(res.insertId, firstName, lastName, email)
+        });
     } else {
-      throw new Error("Passwords not working")
+      throw new Error("Passwords don't match");
     }
   }
 };
