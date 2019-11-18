@@ -1,8 +1,10 @@
-describe('User', function(){
-  
-  var user;
+const User = require('../src/backend/User')
 
-    beforeEach(function(){
+describe('User', () => {
+  
+  let user;
+
+    beforeEach(() => {
       let = firstName = "John";
       let = surname = "Doe";
       let = email = "JohnDoe@Gmail.com"
@@ -11,17 +13,17 @@ describe('User', function(){
     });
 
 
-  describe('Defaults', function(){
+  describe('Defaults', () => {
 
-    it('Can be an instance of User', function(){
+    it('Can be an instance of User', () => {
       expect(user).toBeInstanceOf(User);
     });
   });
 
-  describe('Sign Up',function(){
-    it('Can be an instance of User', function(){
+  describe('Sign Up',() => {
+    it('Can be an instance of User', () => {
 
-      user.signUp(firstName, surname, email, password);
+      user.signUp(firstName, surname, email, password, password);
       expect(user.firstName).toEqual("John");
       expect(user.surname).toEqual("Doe");
       expect(user.email).toEqual("JohnDoe@Gmail.com");

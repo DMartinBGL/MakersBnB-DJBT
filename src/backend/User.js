@@ -32,7 +32,9 @@ will then send this information to the DBHelper
       this.email = email;
       this.password = password;
     } else {
-      throw new error("Passwords do not match!")
+      throw new Error("Passwords do not match!")
     }
   }
 };
+
+module.exports = User;
