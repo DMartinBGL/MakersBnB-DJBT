@@ -2,14 +2,15 @@ describe('User', function(){
   
   describe('Defaults', function(){
 
+    var user;
+
     beforeEach(function(){
-      var user = new User;
+      user = new User;
     });
 
     it('Can be an instance of User', function(){
       expect(user).toBeInstanceOf(User);
     });
-
   });
 
 });
