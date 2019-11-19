@@ -1,0 +1,53 @@
+
+.topnav {
+    background-color: rgb(189, 189, 189);
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 7px;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    width: 14%;
+    margin: 0 auto;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a.hover:hover {
+    background-color: rgba(93, 215, 236, 0.65);
+    color: black;
+    border-left: solid;
+    border-right: solid;
+    border-width: 3px;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: rgba(93, 215, 236, 0.65);
+    color: black;
+    border-left: solid;
+    border-right: solid;
+    border-width: 3px;
+  }
+  
+.searchbar{
+    border-style: solid;
+    border-width: 2px;
+}
+
+  .topnav input[type=text] {
+    float: none;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 20px;
+    font-size: 17px;
+  }
