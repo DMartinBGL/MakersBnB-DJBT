@@ -1,15 +1,16 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const User = require('./User')
+const User = require('./User');
+const Space = require('./Space');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use('/public', express.static(__dirname + '/public'));
 app.use(express.urlencoded());
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   res.render('index', {
-    name: 'suprise'
+    spaces: await Space.list()
   });
 });
 
