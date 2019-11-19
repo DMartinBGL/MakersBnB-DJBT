@@ -24,8 +24,14 @@
 
 <body>
   <br><input class="searchbar" type='text' placeholder="Search space's.."><br>
-  <div id="space" class="boxed" id=>
-    this is where our spaces will go
+  <div id="space" class="container">
+    <div class="row">
+      <% spaces.forEach((space) => { %>
+      <div class="col-sm">
+        <p><%= space.name %></p>
+      </div>
+      <% }); %>
+    </div>
   </div>
 </body>
 
