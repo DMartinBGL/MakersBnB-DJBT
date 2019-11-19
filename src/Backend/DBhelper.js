@@ -8,13 +8,19 @@ const connection = mysql.createConnection({
 });
 
 // auto closes connection
-function query(statement, callback) {
-  connection.connect((err) => {
-    if (err) throw err;
+function query(statement) {
+  connection.connect((error) => {
+    if (error) throw error;
   });
 
-  connection.query(statement, callback);
-  connection.end();
+  return new Promise((resolve, reject) => {
+    connection.query(statement, (error, result) => {
+      if (error) return reject(error);
+      resolve(result);
+    });
+
+    connection.end();
+  });
 }
 
 module.exports = {
