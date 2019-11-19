@@ -29,7 +29,7 @@ class User {
   user will be returned, otherwise an error is thrown
   */
   static async register(firstName, lastName, email, password, confirmPassword) {
-    if (firstname && lastName && email && password && confirmPassword) {
+    if (firstName != "" && lastName != "" && email != "" && password != "" && confirmPassword != "") {
       if (password === confirmPassword){
         const result = await registerQuery(firstName, lastName, email, password);
         return new User(result.insertId, firstName, lastName, email);
