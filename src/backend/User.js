@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const { authenticateQuery } = require('./dbHelper');
 const { registerQuery } = require('./dbHelper');
 
@@ -14,10 +15,15 @@ class User {
   is successful, otherwise an error is thrown
   */
   static async authenticate(email, password) {
+
+    const passwordHash = crypto.createHmac('sha256', password)
+    .digest('hex');
+
+
     const result = await authenticateQuery(email);
     const data = result[0];
     
-      if (data && password === data.password) {
+      if (data && passwordHash === data.password) {
         return new User(result.insertId, data.firstname, data.lastname, data.email);
       }
       else throw('Unable to authenticate user');
