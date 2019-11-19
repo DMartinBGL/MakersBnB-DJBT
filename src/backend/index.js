@@ -15,8 +15,12 @@ app.get('/login', (req, res) => {
   res.render('login')
 });
 
+app.get('/list', (req, res) => {
+  res.render('list')
+});
+
 app.get('/register', (req, res) => {
-  res.send('registration page')
+  res.render('registration page')
 });
 
 app.listen(8000, () => {

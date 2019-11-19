@@ -5,7 +5,6 @@
     font-family: Arial, Helvetica, sans-serif;
     border-style: solid;
     border-width: 3px;
-    border-radius: 7px;
   }
   
   /* Style the links inside the navigation bar */
@@ -16,7 +15,7 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 20px;
-    width: 14%;
+    width: 20%;
     margin: 0 auto;
   }
   
@@ -38,9 +37,12 @@
     border-width: 3px;
   }
   
-.searchbar{
+  
+.topnav input{
     border-style: solid;
     border-width: 2px;
+    text-align: left;
+    display: inline-block;
 }
 
   .topnav input[type=text] {
@@ -51,3 +53,56 @@
     margin-right: 20px;
     font-size: 17px;
   }
+
+/* end of navigation bar css here */
+/* start of list a space css here */
+
+/* formatting list a space description, title, date and price info boxes */
+.inputboxes{ 
+       text-align: center;
+       margin: 0 auto;
+       width: 400px;
+       height: 200px;
+  }
+
+#description { 
+    margin: 0 auto;
+    width: 400px;
+    height: 200px;
+  }
+
+#name {
+    width: 400px;
+}
+
+#address {
+    width: 400px;
+}
+
+#startDate {
+    width: 400px;
+}
+
+#endDate {
+    width: 400px;
+}
+
+#price {
+    width: 400px;
+}
+
+/* home page css */
+
+/* search bar formatting */
+.searchbar {
+    font-size: 17px;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+}
+
+/* space info boxes */
+
+.boxed {
+    border: 1px solid black;
+}
