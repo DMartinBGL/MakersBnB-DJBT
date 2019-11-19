@@ -1,39 +1,50 @@
-//Class which stores the user information
-class User{
-  //defines the class variables
-  
-  constructor(){
+const crypto = require('crypto');
+const { authenticateQuery } = require('./dbHelper');
+const { registerQuery } = require('./dbHelper');
+
+class User {
+  constructor(id, firstName, lastName, email) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+  }
+
+  /*
+  Returns instance of User if authentication
+  is successful, otherwise an error is thrown
+  */
+  static async authenticate(email, password) {
+
+    const passwordHash = crypto.createHmac('sha256', password)
+    .digest('hex');
+
+
+    const result = await authenticateQuery(email);
+    const data = result[0];
     
-    this.firstName;
-    this.surname;
-    this.email;
-    this.password;
+      if (data && passwordHash === data.password) {
+        return new User(result.insertId, data.firstname, data.lastname, data.email);
+      }
+      else throw('Unable to authenticate user');
   }
 
-  //Password validation function
-  _passwordEqual(password, confirmPassword){
-    if (password == confirmPassword){
-      return true;
+  /*
+  Sign up function takes in user information,
+  if registeration is successful, an instance of,
+  user will be returned, otherwise an error is thrown
+  */
+  static async register(firstName, lastName, email, password, confirmPassword) {
+    if (firstName != "" && lastName != "" && email != "" && password != "" && confirmPassword != "") {
+      if (password === confirmPassword){
+        const result = await registerQuery(firstName, lastName, email, password);
+        return new User(result.insertId, firstName, lastName, email);
+      } else {
+        throw("Passwords don't match");
+      }
     } else{
-      return false;
-    }
-  }
-
-/*
-Sign up function takes in user information,
-sets the class variables to that information,
-will then send this information to the DBHelper
-*/
-  signUp(firstName, surname, email, password, confirmPassword)
-  {
-    if (this._passwordEqual(password,confirmPassword)){
-      this.firstName = firstName;
-      this.surname = surname;
-      this.email = email;
-      this.password = password;
-    } else {
-      throw new Error("Passwords do not match!")
-    }
+      throw("Field left empty")
+    }    
   }
 };
 
