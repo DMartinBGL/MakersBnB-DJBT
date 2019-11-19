@@ -2,13 +2,10 @@
   <head>
     <body>
       <h1>Log In</h1>
-      <form >
-        <input type="text" name="firstname" placeholder="firstname"/>
-        <input type="text" name="surname" placeholder="surname"/>
-        <input type="text" name= "email" placeholder="email"/>
+      <form method="POST" action="/login">
+        <input type="text" name="email" placeholder="Email"/>
         <input type="text" name="password" placeholder="Password"/>
-        <input type="text" name="confirmpassword" placeholder="confirmPassword"/>
-        <input type="submit" value="submit" onclick="signUp()" />
+        <input type="submit" value="submit" />
       </form>
     </body>
   </head>

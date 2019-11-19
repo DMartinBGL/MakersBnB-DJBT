@@ -14,14 +14,15 @@ class User {
   Returns instance of User if authentication
   is successful, otherwise an error is thrown
   */
-  static async authenticate(email, password) {
+  static async authenticate(email, password, res) {
     const result = await query(`SELECT * FROM ${USER_TABLE} WHERE email = '${email}'`);
     const data = result[0];
-
-    if (data && password === data.password) {
-      return new User(result.insertId, data.firstname, data.lastname, data.email);
-    }
-    else throw new Error('Unable to authenticate user');
+    
+      if (data && password === data.password) {
+        return new User(result.insertId, data.firstname, data.lastname, data.email);
+      }
+      else throw('Unable to authenticate user');
+    
   }
 
   /*
