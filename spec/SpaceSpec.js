@@ -3,14 +3,15 @@ const Space = require('../src/backend/Space')
 describe('Space', () => {
 
   let space;
+  const date = new Date().toISOString().split("T")[0].toString();
   const id = 1;
   const name = 'Paradise Cottage';
   const address = "10, Downsyndrome Street, Bumpkinham, Bullshire, C0 NT";
-  const startDate = '01/01/20';
-  const endDate = '08/01/20';
+  const startDate = date;
+  const endDate = date;
   const owner = 'sunny villas'; 
   const available = true;
-  const dateCreated = "27/07/2001";
+  const dateCreated = date;
   const price = 84;
 
   beforeEach(() => {
@@ -57,5 +58,32 @@ describe('Space', () => {
     it('shows price per night', () => {
       expect(space.price).toBe(price);
     });
+  });
+
+  describe('database methods', () => {
+    beforeEach(async () => {
+      await Space.clear();
+      await Space.init();
+    });
+
+    it('is initially empty', async () => {
+      const list = await Space.list();
+      expect(list.length).toBe(0);
+    });
+
+    it('allow us to add listing to space table', async () => {
+      const space = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price);
+      //console.log(space);
+      expect(space).toBeInstanceOf(Space);
+    });
+
+    it('gets one', async () => {
+      const savedSpace = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price);
+      expect(await Space.select(space.id)).toBe(savedSpace);
+    });
+
+    // it('deletes a space', async () => {
+    //   const space = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price); 
+    // });
   });
 });
