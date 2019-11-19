@@ -59,6 +59,7 @@ function registerQuery(firstName, lastName, email, password) {
 }
 
 module.exports = {
+  query,
   authenticateQuery,
   registerQuery
 };
