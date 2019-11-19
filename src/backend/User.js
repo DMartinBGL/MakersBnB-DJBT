@@ -1,38 +1,44 @@
-//Class which stores the user information
-class User{
-  //defines the class variables
-  
-  constructor(){
-    
-    this.firstName;
-    this.surname;
-    this.email;
-    this.password;
+const { query } = require('./dbHelper');
+
+const USER_TABLE = 'User';
+
+class User {
+  constructor(id, firstName, lastName, email) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
   }
 
-  //Password validation function
-  _passwordEqual(password, confirmPassword){
-    if (password == confirmPassword){
-      return true;
-    } else{
-      return false;
+  /*
+  Returns instance of User if authentication
+  is successful, otherwise an error is thrown
+  */
+  static async authenticate(email, password) {
+    const result = await query(`SELECT * FROM ${USER_TABLE} WHERE email = '${email}'`);
+    const data = result[0];
+
+    if (data && password === data.password) {
+      return new User(result.insertId, data.firstname, data.lastname, data.email);
     }
+    else throw new Error('Unable to authenticate user');
   }
 
-/*
-Sign up function takes in user information,
-sets the class variables to that information,
-will then send this information to the DBHelper
-*/
-  signUp(firstName, surname, email, password, confirmPassword)
-  {
-    if (this._passwordEqual(password,confirmPassword)){
-      this.firstName = firstName;
-      this.surname = surname;
-      this.email = email;
-      this.password = password;
+  /*
+  Sign up function takes in user information,
+  if registeration is successful, an instance of,
+  user will be returned, otherwise an error is thrown
+  */
+  static async register(firstName, lastName, email, password, confirmPassword) {
+    if (password === confirmPassword){
+      const result = await query(
+        `INSERT INTO ${USER_TABLE} (firstname, lastname, email, password)
+        VALUES ('${firstName}', '${lastName}', '${email}', '${password}');`
+        );
+
+      return new User(result.insertId, firstName, lastName, email);
     } else {
-      throw new Error("Passwords do not match!")
+      throw new Error("Passwords don't match");
     }
   }
 };
