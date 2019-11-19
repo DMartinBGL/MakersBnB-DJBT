@@ -57,3 +57,7 @@ app.post('/login', (req, res) => {
 app.listen(8000, () => {
   console.log('Example app listeniing on port 8000!')
 });
+
+app.get('/list', (req, res) => {
+  res.render('list')
+});
