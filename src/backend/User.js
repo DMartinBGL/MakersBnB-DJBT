@@ -31,16 +31,20 @@ class User {
   user will be returned, otherwise an error is thrown
   */
   static async register(firstName, lastName, email, password, confirmPassword) {
-    if (password === confirmPassword){
-      const result = await query(
-        `INSERT INTO ${USER_TABLE} (firstname, lastname, email, password)
-        VALUES ('${firstName}', '${lastName}', '${email}', '${password}');`
-        );
-
-      return new User(result.insertId, firstName, lastName, email);
-    } else {
-      throw new Error("Passwords don't match");
-    }
+    if (firstname && lastName && email && password && confirmPassword) {
+      if (password === confirmPassword){
+        const result = await query(
+          `INSERT INTO ${USER_TABLE} (firstname, lastname, email, password)
+          VALUES ('${firstName}', '${lastName}', '${email}', '${password}');`
+          );
+  
+        return new User(result.insertId, firstName, lastName, email);
+      } else {
+        throw("Passwords don't match");
+      }
+    } else{
+      throw("Field left empty")
+    }    
   }
 };
 

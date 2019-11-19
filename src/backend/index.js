@@ -16,6 +16,10 @@ app.get('/register', (req, res) => {
   res.render('registration')
 });
 
+app.get('/register/error', (req,res) => {
+  res.render('registrationError')
+})
+
 app.post('/register', (req, res) => {
   const firstName = req.body.firstname;
   const surname = req.body.surname;
@@ -23,9 +27,11 @@ app.post('/register', (req, res) => {
   const password = req.body.password;
   const confirmPassword = req.body.confirmpassword
   
-  User.register(firstName, surname, email, password, confirmPassword)
-  
-  res.redirect('/')
+  User.register(firstName, surname, email, password, confirmPassword).then(()=>{
+    res.redirect('/login')
+  },(err)=>{
+    res.redirect('/register/error')
+  })
 })
 
 app.get('/login', (req, res) => {
