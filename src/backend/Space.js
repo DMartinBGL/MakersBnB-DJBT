@@ -27,7 +27,12 @@ class Space {
   }
 
   static async list() {
-    return await query('SELECT * FROM Space');
+    let list = [];
+    const result = await query('SELECT * FROM Space'); 
+    result.forEach(data => {
+      list.push(new Space(data.id, data.name, data.address, makeDate(data.startdate), makeDate(data.enddate), data.owner, data.available, makeDate(data.datecreated), data.price));
+    });
+    return list;
   }
 
   static async add(name, address, startDate, endDate, owner, available, dateCreated, price) {
