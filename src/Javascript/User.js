@@ -1,5 +1,7 @@
 const { query } = require('../Backend/DBhelper');
 
+const USER_TABLE = 'User';
+
 class User {
   constructor(id, firstName, lastName, email) {
     this.id = id;
@@ -9,19 +11,32 @@ class User {
   }
 
   /*
+  Returns instance of User if authentication
+  is successful, otherwise an error is thrown
+  */
+  static async authenticate(email, password) {
+    const result = await query(`SELECT * FROM ${USER_TABLE} WHERE email = '${email}'`);
+    const data = result[0];
+
+    if (password === data.password) {
+      return new User(data.id, data.firstname, data.lastname, data.email);
+    }
+    else throw new Error('Unable to authenticate user');
+  }
+
+  /*
   Sign up function takes in user information,
   if registeration is successful, an instance of,
   user will be returned, otherwise an error is thrown
   */
-  static register(firstName, lastName, email, password, confirmPassword) {
+  static async register(firstName, lastName, email, password, confirmPassword) {
     if (password === confirmPassword){
-      query(
-        `INSERT INTO User (firstname, lastname, email, password)
-        VALUES ('${firstName}', '${lastName}', '${email}', '${password}');`,
-        (err, res) => {
-          if (err) throw err;
-          else return new User(res.insertId, firstName, lastName, email)
-        });
+      const result = query(
+        `INSERT INTO ${USER_TABLE} (firstname, lastname, email, password)
+        VALUES ('${firstName}', '${lastName}', '${email}', '${password}');`
+        );
+
+      return new User(result.insertId, firstName, lastName, email);
     } else {
       throw new Error("Passwords don't match");
     }
