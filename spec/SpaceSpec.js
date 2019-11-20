@@ -6,16 +6,17 @@ describe('Space', () => {
   const date = new Date().toISOString().split("T")[0].toString();
   const id = 1;
   const name = 'Paradise Cottage';
-  const address = "10, Downsyndrome Street, Bumpkinham, Bullshire, C0 NT";
+  const address = "10, Big Street, Little Town, Mediumshire, CE1 NT";
   const startDate = date;
   const endDate = date;
   const owner = 'sunny villas'; 
   const available = true;
   const dateCreated = date;
+  const description = "lorem epsom";
   const price = 84;
 
   beforeEach(() => {
-    space = new Space(id, name, address, startDate, endDate, owner, available, dateCreated, price);
+    space = new Space(id, name, address, startDate, endDate, owner, available, dateCreated, description, price);
   });
 
   it('Can be an instance of Space', () => {
@@ -55,6 +56,10 @@ describe('Space', () => {
       expect(space.dateCreated).toBe(dateCreated);
     });
 
+    it('has a description', () => {
+      expect(space.description).toBe(description);
+    });
+
     it('shows price per night', () => {
       expect(space.price).toBe(price);
     });
@@ -72,18 +77,18 @@ describe('Space', () => {
     });
 
     it('allow us to add listing to space table', async () => {
-      const space = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price);
+      const space = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, description, price);
       //console.log(space);
       expect(space).toBeInstanceOf(Space);
     });
 
     it('gets one', async () => {
-      const savedSpace = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price);
+      const savedSpace = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, description, price);
       expect(await Space.getOne(savedSpace.id)).toEqual(savedSpace);
     });
 
     it('removes a space', async () => {
-      const savedSpace = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price); 
+      const savedSpace = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, description, price); 
       await Space.removeOne(savedSpace.id);
       expect(await Space.getOne(savedSpace.id)).toBe(null);
     });
