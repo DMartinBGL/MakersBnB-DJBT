@@ -79,11 +79,13 @@ describe('Space', () => {
 
     it('gets one', async () => {
       const savedSpace = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price);
-      expect(await Space.select(space.id)).toBe(savedSpace);
+      expect(await Space.getOne(savedSpace.id)).toEqual(savedSpace);
     });
 
-    // it('deletes a space', async () => {
-    //   const space = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price); 
-    // });
+    it('removes a space', async () => {
+      const savedSpace = await Space.add(name, address, startDate, endDate, owner, available, dateCreated, price); 
+      await Space.removeOne(savedSpace.id);
+      expect(await Space.getOne(savedSpace.id)).toBe(null);
+    });
   });
 });

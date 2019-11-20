@@ -43,13 +43,14 @@ class Space {
 
   static async getOne(id) {
     const result = await query(`SELECT * FROM Space WHERE id = ${id}`);
+    if (result[0] === undefined) return null;
     const data = result[0];
-    return new Space(data.id, data.name, data.address, makeDate(data.startdate), makeDate(data.enddate), data.owner, data.available, makeDate(data.datecreated), data.price);
+    return new Space(data.id, data.name, data.address, makeDate(data.startdate), makeDate(data.enddate), data.owner, data.available == 'true', makeDate(data.datecreated), data.price);
 
   }
 
-  static async delete() {
-    const result = await query();
+  static async removeOne(id) {
+    await query(`DELETE FROM Space WHERE id = ${id}`);
   }
 }
 
