@@ -37,6 +37,8 @@ body {
 .space-description {
   font-size: 1.1em;
   word-wrap: break-word;
+  max-height: 110px;
+  overflow: hidden;
 }
 
 .space-price {
@@ -44,6 +46,8 @@ body {
   bottom: 0;
   font-size: 2em;
   right: 25px;
+  background-color: whitesmoke;
+  border-radius: 30px;
 }
 
 .space .row {
