@@ -19,32 +19,20 @@
     <a class="hover" href="/register">Register</a>
     <a class="hover" href="/list">List a space</a>
   </div>
+
+  <div id="parent">
+    <div class="square" id="child">
+      <h1 id="title">Thermostat</h1>
+      <div class="center">
+        <form method="POST" action="/login">
+          <input type="text" name="email" placeholder="Email" />
+          <input type="text" name="password" placeholder="Password" />
+          <input type="submit" value="submit" />
+        </form>
+      </div>
+    </div>
+  </div>
+
 </body>
-
-<head>
-
-<body>
-  <form>
-    <input type="text" name="firstname" placeholder="firstname" />
-    <input type="text" name="surname" placeholder="surname" />
-    <input type="text" name="email" placeholder="email" />
-    <input type="text" name="password" placeholder="Password" />
-    <input type="text" name="confirmpassword" placeholder="confirmPassword" />
-    <input type="submit" value="submit" onclick="signUp()" />
-  </form>
-</body>
-</head>
-
-<head>
-
-<body>
-  <h1>Log In</h1>
-  <form method="POST" action="/login">
-    <input type="text" name="email" placeholder="Email" />
-    <input type="text" name="password" placeholder="Password" />
-    <input type="submit" value="submit" />
-  </form>
-</body>
-</head>
 
 </html>
