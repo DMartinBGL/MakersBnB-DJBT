@@ -25,25 +25,36 @@
 
 <body>
   <br><input class="searchbar" type='text' placeholder="Search space's.."><br>
-  <div id="spaces" class="container">
+  <div id="spaces" class="container-fluid">
     <div class="row">
       <% spaces.forEach((space) => { %>
       <div class="col-md-12 col-lg-6">
-        <div class="space container">
-          <div class="row">
-            <div class="col-md-6 col-lg-6">
-              <img src="..." class="card-img-left space-img" alt="..">
-            </div>
-            <div class="card-body col-md-6 col-lg-6">
-                <h5 class="card-title space-title"><%= space.name %></h5>
-                <p class="card-text space-description"><%= space.description %></p>
-            </div>
+        <div class="space" data-id="<%= space.id %>">
+          <div class="col-xs-6 col-md-6 col-lg-6">
+            <img src="/public/img/house.jpg" class="card-img-left space-img" alt="..">
+          </div>
+          <div class="card-body col-xs-6 col-md-6 col-lg-6">
+              <h5 class="card-title space-title"><%= space.name %></h5>
+              <p class="card-text space-description"><%= space.description %></p>
+              <p class="space-price">£<%= space.price %></p>
           </div>
         </div>
       </div>
       <% }); %>
     </div>
   </div>
+  <script>
+    $(document).ready(() => {
+      $(".space").on("click", (event) => {
+        const $space = $(event.target).closest(".space");
+        const id = $space.data("id");
+
+        console.log(id);
+
+        window.location.href = "/space/" + id;
+      });
+    });
+  </script>
 </body>
 
 
