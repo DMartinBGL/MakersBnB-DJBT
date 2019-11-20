@@ -12,6 +12,8 @@ body {
   margin-bottom: 10px;
   height: 250px;
   padding: 5px;
+  background-color: whitesmoke;
+  border-radius: 5px;
 }
 
 .space:hover {
@@ -41,5 +43,22 @@ body {
   position: absolute;
   bottom: 0;
   font-size: 2em;
-  right: 10px;
+  right: 25px;
+}
+
+.space .row {
+  height: 100%;
+}
+
+#space-search {
+  font-size: 1.5em;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  border: 2px solid black;
+}
+
+#content {
+  margin-top: 20px;
 }
