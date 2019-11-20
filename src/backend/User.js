@@ -63,4 +63,5 @@ function checkPassword(password, confirmPassword) {
   } else { return true; }
 }
 
+
 module.exports = User;
