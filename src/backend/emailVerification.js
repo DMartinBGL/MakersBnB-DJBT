@@ -10,14 +10,16 @@ async function add(email, token) {
 
 async function verify(token) {
   const result = await query(`SELECT * FROM EmailVerification WHERE token = '${token}'`);
-  if (result[0]) {
-    const email = result[0].email;
-    
-} else {
-  throw new Error('unable to verify');
+  const data = result[0];
+
+  if (data === undefined) throw new Error("Unable to verify");
+
+  query(`UPDATE User SET verified = 1 WHERE email = '${data.email}'`);
+  query(`DELETE FROM EmailVerification WHERE email = '${data.email}'`);
 }
 
-// const test = async()=>{
-//   await init();
-//   console.log('done');
-// }
+module.exports = {
+  init,
+  add,
+  verify
+};
