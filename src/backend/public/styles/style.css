@@ -110,6 +110,14 @@
 
 /* Login CSS */
 
+#form-label{
+  font-family: 'Alata', sans-serif;
+}
+
+#form-button{
+  background-color: #343A40;
+  border: transparent;
+}
 
 #parent {
   display: table;
