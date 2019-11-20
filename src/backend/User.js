@@ -17,16 +17,16 @@ class User {
   static async authenticate(email, password) {
 
     const passwordHash = crypto.createHmac('sha256', password)
-    .digest('hex');
+      .digest('hex');
 
 
     const result = await authenticateQuery(email);
     const data = result[0];
-    
-      if (data && passwordHash === data.password) {
-        return new User(result.insertId, data.firstname, data.lastname, data.email);
-      }
-      else throw('Unable to authenticate user');
+
+    if (data && passwordHash === data.password) {
+      return new User(result.insertId, data.firstname, data.lastname, data.email);
+    }
+    else throw ('Unable to authenticate user');
   }
 
   /*
@@ -35,16 +35,16 @@ class User {
   user will be returned, otherwise an error is thrown
   */
   static async register(firstName, lastName, email, password, confirmPassword) {
-    if (firstName != "" && lastName != "" && email != "" && password != "" && confirmPassword != "") {
-      if (password === confirmPassword){
+    if (firstName != "" && lastName != "" && email != "" && email.includes("@") && password != "" && confirmPassword != "") {
+      if (password === confirmPassword) {
         const result = await registerQuery(firstName, lastName, email, password);
         return new User(result.insertId, firstName, lastName, email);
       } else {
-        throw("Passwords don't match");
+        throw ("Passwords don't match");
       }
-    } else{
-      throw("Field left empty")
-    }    
+    } else {
+      throw ("Field left empty")
+    }
   }
 };
 
