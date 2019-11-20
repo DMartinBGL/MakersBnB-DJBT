@@ -106,3 +106,58 @@
 .boxed {
     border: 1px solid black;
 }
+
+
+/* Login CSS */
+
+
+#form-label{
+  font-family: 'Alata', sans-serif;
+}
+
+#form-button{
+  background-color: #343A40;
+  border: transparent;
+}
+
+#parent {
+  display: table;
+  border-spacing: 0px;
+  margin: 10% auto 10% auto;
+}
+
+#parent-list {
+  display: table;
+  border-spacing: 0px;
+  margin: 1% auto 10% auto;
+}
+
+#child {
+  display: table-cell;
+  padding: 5px;
+}
+
+body {
+  background-color: rgba(93, 215, 236, 0.65) !important;
+}
+
+.center {
+  text-align: center;
+}
+
+
+.square {
+  height: 300px;
+  width: 400px;
+  border-radius: 20px;
+  background-color: darkgrey;
+  margin: auto;
+}
+
+.square h1 {
+  text-align: center;
+}
+
+.square p {
+  padding: 20px;
+}
