@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const User = require('./User');
 const Space = require('./Space');
+const DBhelper = require('./dbHelper')
+const SpaceRequest = require('./SpaceRequest')
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use('/public', express.static(__dirname + '/public'));
@@ -24,15 +26,18 @@ app.get('/space/:id', (req, res) => {
   });
 });
 
-app.post('/space/:id/booking-confirmation', (req, res) => {
-  const id = space.id
-  const requestingUser = req.session.user
+app.post('/space/confirmation', async (req, res) => {
+
+  const result = await DBhelper.query(`SELECT * FROM Space WHERE startdate = '${req.body.checkIn}'`);
+
+  const id = result[0].id;
+  const requestingUser = "guest"
   const checkIn = req.body.checkIn
   const checkOut = req.body.checkout
-  const owner = req.body.owner
-  const available = checkAvailable(checkIn, checkOut, space.startDate, space.endDate)
+  const owner = result[0].owner
+  const available = checkAvailable(checkIn, checkOut, result[0].startDate, result[0].endDate)
 
-  checkAvailable = function (checkIn, checkOut, start, end) {
+  function checkAvailable(checkIn, checkOut, start, end) {
     if ((start <= checkIn <= end) && (start <= checkOut <= end)) {
       return true;
     } else {
@@ -40,18 +45,12 @@ app.post('/space/:id/booking-confirmation', (req, res) => {
     }
   };
 
-  new SpaceRequest(id, requestingUser, checkIn, CheckOut, owner, available).then(() => {
+  SpaceRequest.createRequest(id, requestingUser, checkIn, checkOut, owner, available).then(() => {
     res.render('confirmation')
   }, (err) => {
     res.redirect('/error')
   })
-};
-
-User.register(firstName, surname, email, password, confirmPassword).then(() => {
-  res.redirect('/login')
-}, (err) => {
-  res.redirect('/error')
-})
+});
 
 
 app.get('/register', (req, res) => {
