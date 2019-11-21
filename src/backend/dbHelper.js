@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const crypto = require('crypto');
 
 const USER_TABLE = 'User';
-const DATABASE = process.env.ENV.toLowerCase() === "test" ? "makersbnb_test" : "makersbnb";
+const DATABASE = (process.env.ENV || "").toLowerCase() === "test" ? "makersbnb_test" : "makersbnb";
 
 
 const pool = mysql.createConnection({
