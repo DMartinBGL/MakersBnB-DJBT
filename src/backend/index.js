@@ -110,7 +110,15 @@ app.get('/list', (req, res) => {
   var user = req.session.user
 
   if (user) {
-    res.render("list")
+    try {
+      user = JSON.parse(req.session.user)
+    } catch {
+      user;
+    }
+
+    res.render('list', {
+      user: user
+    });
   } else {
     res.redirect('/login')
   }
