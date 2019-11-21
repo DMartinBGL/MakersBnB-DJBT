@@ -79,13 +79,20 @@ app.get('/error', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  try {
+    user = JSON.parse(req.session.user)
+  } catch {
+    user;
+  }
+
+  res.render('login', {
+    user: user
+  });
 });
 
 app.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-
   User.authenticate(email, password, res).then((user) => {
     req.session.user = JSON.stringify(user);
     res.redirect('/')
