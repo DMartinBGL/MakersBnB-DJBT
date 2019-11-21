@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "jasmine",
+    "test": "ENV='test' istanbul cover node_modules/jasmine/bin/jasmine.js",
     "start": "node src/backend/index.js"
   },
   "repository": {
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "eslint": "^6.6.0",
+    "istanbul": "^0.4.5",
     "jasmine": "^3.5.0"
   }
 }
