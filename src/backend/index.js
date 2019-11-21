@@ -8,6 +8,9 @@ const DBhelper = require('./dbHelper')
 const SpaceRequest = require('./SpaceRequest')
 const { verify } = require('./emailVerification');
 const { sendVerificationEmail } = require('./mailer')
+
+const PORT = process.env.PORT || 8000;
+
 var user;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -146,8 +149,8 @@ app.get('/logout', (req, res) => {
   res.redirect('/')
 });
 
-app.listen(process.env.PORT || 8000, () => {
-  console.log('Example app listening on port 8000!')
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}!`)
 });
 
 app.get('/verify-email/:token', (req, res) => {
