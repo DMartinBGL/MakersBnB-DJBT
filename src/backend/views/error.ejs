@@ -23,6 +23,11 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <% if (user){ %>
+        <span class="navbar-text" id="usertext"><%= user["firstName"] %></span>
+        <% }else { %>
+        <span class="navbar-text" id="usertext">Guest</span>
+        <% } %>
     </nav>
 
 

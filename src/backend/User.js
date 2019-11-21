@@ -4,11 +4,12 @@ const { registerQuery } = require('./dbHelper');
 var errorMessage;
 
 class User {
-  constructor(id, firstName, lastName, email) {
+  constructor(id, firstName, lastName, email, verified) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.verified = verified;
   }
 
   /*
@@ -25,7 +26,7 @@ class User {
     const data = result[0];
 
     if (data && passwordHash === data.password) {
-      return new User(result.insertId, data.firstname, data.lastname, data.email);
+      return new User(data.id, data.firstname, data.lastname, data.email, data.verified);
     }
     else throw ('Unable to authenticate user');
   }

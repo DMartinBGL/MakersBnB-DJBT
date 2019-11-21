@@ -38,6 +38,11 @@
           <a class="nav-link" href="/list">List a Space</a>
         </li>
       </ul>
+      <% if (user){ %>
+      <span class="navbar-text" id="usertext"><%= user["firstName"] %></span>
+      <% }else { %>
+      <span class="navbar-text" id="usertext">Guest</span>
+      <% } %>
     </div>
   </nav>
 
