@@ -37,20 +37,16 @@ class User {
   user will be returned, otherwise an error is thrown
   */
   static async register(firstName, lastName, email, password, confirmPassword) {
-    if (firstName != "" && lastName != "" && email != "" && email.includes("@") && password != "" && confirmPassword != "") {
-      if (checkPassword(password, confirmPassword) === true) {
-        const result = await registerQuery(firstName, lastName, email, password);
-        return new User(result.insertId, firstName, lastName, email);
-      } else {
-        throw (errorMessage);
-      }
+    if (checkCredentials(firstName, lastName, email, password, confirmPassword) === true) {
+      const result = await registerQuery(firstName, lastName, email, password);
+      return new User(result.insertId, firstName, lastName, email);
     } else {
-      throw ("Field left empty")
+      throw (errorMessage)
     }
   }
 };
 
-function checkPassword(password, confirmPassword) {
+function checkCredentials(firstName, lastName, email, password, confirmPassword) {
   if (password.length < 7) {
     (errorMessage = "Too short, 8 char min");
   } else if (password.length > 30) {
@@ -61,6 +57,8 @@ function checkPassword(password, confirmPassword) {
     (errorMessage = "No letter(s)");
   } else if (password !== confirmPassword) {
     (errorMessage = "Passwords do not match")
+  } else if (firstName == "" || lastName == "" || email == "" || password == "" || confirmPassword == "") {
+    (errorMessage = "You left a field empty");
   } else { return true; }
 }
 
