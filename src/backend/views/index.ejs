@@ -102,7 +102,7 @@
         window.location.href = "/space/" + id;
       });
 
-      $("#space-search").on('change',() => {
+      $("#space-search").on('input',() => {
           const search = $('#space-search').val().split(" ");
           $(".space").each( function() {
             const closest = $( this ).text();
