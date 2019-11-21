@@ -37,6 +37,13 @@
         <li class="nav-item">
           <a class="nav-link" href="/list">List a Space </a>
         </li>
+        <li class="nav-item">
+          <% if (user){ %>
+          <a class="nav-link"><%= user["firstName"] %></a>
+          <% }else { %>
+          <a class="nav-link">Guest</a>
+          <% } %>
+        </li>
       </ul>
     </div>
   </nav>
@@ -79,16 +86,16 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-    <script>
-      $(document).ready(() => {
-        $(".space").on("click", (event) => {
-          const $space = $(event.target).closest(".space");
-          const id = $space.data("id");
+  <script>
+    $(document).ready(() => {
+      $(".space").on("click", (event) => {
+        const $space = $(event.target).closest(".space");
+        const id = $space.data("id");
 
-          window.location.href = "/space/" + id;
-        });
+        window.location.href = "/space/" + id;
       });
-    </script>
+    });
+  </script>
 </body>
 
 </html>
