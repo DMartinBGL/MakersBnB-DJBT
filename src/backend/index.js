@@ -113,6 +113,11 @@ app.post('/login', (req, res) => {
   })
 });
 
+app.get('/logout', (req, res) => {
+  req.session.user = null;
+  res.redirect('/')
+});
+
 app.listen(8000, () => {
   console.log('Example app listening on port 8000!')
 });
