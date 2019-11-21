@@ -18,6 +18,7 @@ body {
 
 .space:hover {
   cursor: pointer;
+  background-color: white;
 }
 
 .space-img {
