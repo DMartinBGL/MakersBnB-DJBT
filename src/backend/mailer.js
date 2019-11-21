@@ -2,7 +2,7 @@ const cryptoRandomString = require('crypto-random-string');
 const sgMail = require('@sendgrid/mail');
 const emailVerification = require('./emailVerification');
 
-const apiKey = "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";
+const apiKey = process.env.SG_KEY;
 const tokenLength = 40;
 const baseUrl = "http://makers-project.xyz";
 

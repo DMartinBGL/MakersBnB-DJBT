@@ -4,11 +4,12 @@ const { registerQuery } = require('./dbHelper');
 var errorMessage;
 
 class User {
-  constructor(id, firstName, lastName, email) {
+  constructor(id, firstName, lastName, email, verified) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.verified = verified;
   }
 
   /*
@@ -25,7 +26,7 @@ class User {
     const data = result[0];
 
     if (data && passwordHash === data.password) {
-      return new User(result.insertId, data.firstname, data.lastname, data.email);
+      return new User(data.id, data.firstname, data.lastname, data.email, data.verified);
     }
     else throw ('Unable to authenticate user');
   }
@@ -36,20 +37,16 @@ class User {
   user will be returned, otherwise an error is thrown
   */
   static async register(firstName, lastName, email, password, confirmPassword) {
-    if (firstName != "" && lastName != "" && email != "" && email.includes("@") && password != "" && confirmPassword != "") {
-      if (checkPassword(password, confirmPassword) === true) {
-        const result = await registerQuery(firstName, lastName, email, password);
-        return new User(result.insertId, firstName, lastName, email);
-      } else {
-        throw (errorMessage);
-      }
+    if (checkCredentials(firstName, lastName, email, password, confirmPassword) === true) {
+      const result = await registerQuery(firstName, lastName, email, password);
+      return new User(result.insertId, firstName, lastName, email);
     } else {
-      throw ("Field left empty")
+      throw (errorMessage)
     }
   }
 };
 
-function checkPassword(password, confirmPassword) {
+function checkCredentials(firstName, lastName, email, password, confirmPassword) {
   if (password.length < 7) {
     (errorMessage = "Too short, 8 char min");
   } else if (password.length > 30) {
@@ -60,6 +57,8 @@ function checkPassword(password, confirmPassword) {
     (errorMessage = "No letter(s)");
   } else if (password !== confirmPassword) {
     (errorMessage = "Passwords do not match")
+  } else if (firstName == "" || lastName == "" || email == "" || password == "" || confirmPassword == "") {
+    (errorMessage = "You left a field empty");
   } else { return true; }
 }
 

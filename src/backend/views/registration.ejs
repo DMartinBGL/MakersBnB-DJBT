@@ -29,15 +29,20 @@
           <a class="nav-link" href="/">Home </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/list">List a Space</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="">Register <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/list">List a Space</a>
-        </li>
       </ul>
+      <% if (user){ %>
+      <span class="navbar-text" id="usertext"><%= user["firstName"] %></span>
+      <% }else { %>
+      <span class="navbar-text" id="usertext">Guest</span>
+      <% } %>
     </div>
   </nav>
 
@@ -57,7 +62,7 @@
         </div>
         <div class="form-group">
           <label for="email" id="form-label">Email</label>
-          <input type="text" class="form-control" name="email" placeholder="Email">
+          <input type="email" class="form-control" name="email" placeholder="Email">
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
