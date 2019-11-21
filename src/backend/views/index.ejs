@@ -101,6 +101,30 @@
 
         window.location.href = "/space/" + id;
       });
+
+      $("#space-search").on('change',() => {
+          const search = $('#space-search').val().split(" ");
+          $(".space").each( function() {
+            const closest = $( this ).text();
+            const terms = $.trim(closest).split(" ");
+            let matched = false;
+            search.forEach(word => { 
+              terms.forEach((v) => {
+                if((v.toLowerCase().indexOf(word.toLowerCase()))!= -1) {
+                  matched = true;
+                }
+              });
+            });
+            
+            if (matched) {
+             $( this ).parent().show();
+            } else {
+              $( this ).parent().hide();
+            }
+            
+          })
+      });
+
     });
   </script>
 </body>
