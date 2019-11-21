@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "ENV='test' nyc node_modules/jasmine/bin/jasmine.js",
+    "test": "ENV='test' nyc --all node_modules/jasmine/bin/jasmine.js",
     "start": "node src/backend/index.js"
   },
   "repository": {
@@ -36,9 +36,12 @@
     "nyc": "^14.1.1"
   },
   "nyc": {
-    "include": "src",
+    "include": [
+      "src/**/*.js"
+    ],
     "exclude": [
-        "**/*Spec.js"
+        "**/*Spec.js",
+        "src/backend/index.js"
     ]
   }
 }
