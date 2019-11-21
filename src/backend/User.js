@@ -20,8 +20,6 @@ class User {
 
     const passwordHash = crypto.createHmac('sha256', password)
       .digest('hex');
-
-
     const result = await authenticateQuery(email);
     const data = result[0];
 
