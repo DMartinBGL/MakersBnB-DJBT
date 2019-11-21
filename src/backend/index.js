@@ -31,8 +31,18 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/space/:id', (req, res) => {
+
+  try {
+    user = JSON.parse(req.session.user)
+  } catch {
+    user;
+  }
+
   Space.getOne(req.params.id).then((space) => {
-    if (space) res.render('space', { space });
+    if (space) res.render('space', {
+      space: space,
+      user: user
+    });
     else res.send('Non existent space');
 
   }, (error) => {
@@ -108,9 +118,9 @@ app.listen(8000, () => {
 });
 
 app.get('/verify-email/:token', (req, res) => {
-  verify(req.params.token).then(() => { 
+  verify(req.params.token).then(() => {
     res.send("Email verified!")
-  }, (err) => { 
+  }, (err) => {
     res.send("could not verify")
   })
 });

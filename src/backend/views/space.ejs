@@ -28,32 +28,47 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
+        <% if (user) { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/list">List a Space</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+        <% }else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/list">List a Space </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/register">Register </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/list">List a Space </a>
-        </li>
+        <% } %>
       </ul>
+      <% if (user){ %>
+      <span class="navbar-text" id="usertext"><%= user["firstName"] %></span>
+      <% }else { %>
+      <span class="navbar-text" id="usertext">Guest</span>
+      <% } %>
     </div>
   </nav>
 
   <img class="img" src="/public/img/house.jpg" class="card-img-top" />
   <div id="content" class="container-fluid">
     <div id="space" class="row">
-        <div class="col-md-12 col-lg-8 offset-lg-2">
-            <div class="card">
-                <h5 class="title"><%= space.name %></h5>
-                <p class="owner"><%= space.owner %></p>
-                <p class="address"><%= space.address %></p>
-                <p class="availability">Available from <span class="start date"><%= space.startDate %></span> until <spa class="end date"><%= space.endDate %></span></p>
-                <p class="description"><%= space.description %></p>
-                <p class="price">£<%= space.price %></p>
-            </div>
+      <div class="col-md-12 col-lg-8 offset-lg-2">
+        <div class="card">
+          <h5 class="title"><%= space.name %></h5>
+          <p class="owner"><%= space.owner %></p>
+          <p class="address"><%= space.address %></p>
+          <p class="availability">Available from <span class="start date"><%= space.startDate %></span> until <spa
+              class="end date"><%= space.endDate %></span></p>
+          <p class="description"><%= space.description %></p>
+          <p class="price">£<%= space.price %></p>
         </div>
+      </div>
     </div>
   </div>
 
