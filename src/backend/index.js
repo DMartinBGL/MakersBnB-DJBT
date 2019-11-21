@@ -50,6 +50,32 @@ app.get('/space/:id', (req, res) => {
   });
 });
 
+app.post('/space/confirmation', async (req, res) => {
+
+  const result = await DBhelper.query(`SELECT * FROM Space WHERE startdate = '${req.body.checkIn}'`);
+
+  const id = result[0].id;
+  const requestingUser = "guest"
+  const checkIn = req.body.checkIn
+  const checkOut = req.body.checkout
+  const owner = result[0].owner
+  const available = checkAvailable(checkIn, checkOut, result[0].startDate, result[0].endDate)
+
+  function checkAvailable(checkIn, checkOut, start, end) {
+    if ((start <= checkIn <= end) && (start <= checkOut <= end)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  SpaceRequest.createRequest(id, requestingUser, checkIn, checkOut, owner, available).then(() => {
+    res.render('confirmation')
+  }, (err) => {
+    res.redirect('/error')
+  })
+});
+
 app.get('/register', (req, res) => {
 
   try {
