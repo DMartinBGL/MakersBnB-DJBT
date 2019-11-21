@@ -40,7 +40,16 @@ app.get('/space/:id', (req, res) => {
 });
 
 app.get('/register', (req, res) => {
-  res.render('registration')
+
+  try {
+    user = JSON.parse(req.session.user)
+  } catch {
+    user;
+  }
+
+  res.render('registration', {
+    user: user
+  });
 });
 
 app.post('/register', (req, res) => {
