@@ -4,6 +4,8 @@ const app = express();
 const path = require('path');
 const User = require('./User');
 const Space = require('./Space');
+const DBhelper = require('./dbHelper')
+const SpaceRequest = require('./SpaceRequest')
 const { verify } = require('./emailVerification');
 const { sendVerificationEmail } = require('./mailer')
 var user;
