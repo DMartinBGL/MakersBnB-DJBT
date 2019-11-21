@@ -2,6 +2,7 @@ const mysql = require('mysql');
 const crypto = require('crypto');
 
 const USER_TABLE = 'User';
+const DATABASE = process.env.ENV === "test" ? "makersbnb_test" : "makersbnb";
 
 
 function query(statement) {
@@ -9,7 +10,7 @@ function query(statement) {
     host: 'database-3.cdqdrq2hjhze.eu-west-2.rds.amazonaws.com',
     user: 'admin',
     password: 'thelegend27',
-    database: 'makersbnb'
+    database: DATABASE
 });
 
   return new Promise((resolve, reject) => {
@@ -26,7 +27,7 @@ function authenticateQuery(email) {
     host: 'database-3.cdqdrq2hjhze.eu-west-2.rds.amazonaws.com',
     user: 'admin',
     password: 'thelegend27',
-    database: 'makersbnb'
+    database: DATABASE
 });
 
   return new Promise((resolve, reject) => {
@@ -46,7 +47,7 @@ function registerQuery(firstName, lastName, email, password) {
     host: 'database-3.cdqdrq2hjhze.eu-west-2.rds.amazonaws.com',
     user: 'admin',
     password: 'thelegend27',
-    database: 'makersbnb'
+    database: DATABASE
 });
 
   return new Promise((resolve, reject) => {
