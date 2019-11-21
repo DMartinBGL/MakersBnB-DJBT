@@ -1,5 +1,5 @@
 class SpaceRequest {
-  constructor(id, requestingUser, startDate, endDate, owner, available, dateCreated,) {
+  constructor(id, requestingUser, startDate, endDate, owner, available) {
 
     this.id = id;
     this.requestingUser = requestingUser;
@@ -7,8 +7,14 @@ class SpaceRequest {
     this.endDate = endDate;
     this.owner = owner;
     this.available = available;
-    this.dateCreated = dateCreated;
   }
+
+
+  static async createRequest(id, requestingUser, checkIn, CheckOut, owner, available) {
+    return new SpaceRequest(id, requestingUser, checkIn, CheckOut, owner, available)
+  };
+
+
 }
 
 module.exports = SpaceRequest;

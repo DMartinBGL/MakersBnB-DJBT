@@ -18,11 +18,41 @@ app.get('/space/:id', (req, res) => {
   Space.getOne(req.params.id).then((space) => {
     if (space) res.render('space', { space });
     else res.send('Non existent space');
-    
+
   }, (error) => {
     res.send("Something wen't wrong");
   });
 });
+
+app.post('/space/:id/booking-confirmation', (req, res) => {
+  const id = space.id
+  const requestingUser = req.session.user
+  const checkIn = req.body.checkIn
+  const checkOut = req.body.checkout
+  const owner = req.body.owner
+  const available = checkAvailable(checkIn, checkOut, space.startDate, space.endDate)
+
+  checkAvailable = function (checkIn, checkOut, start, end) {
+    if ((start <= checkIn <= end) && (start <= checkOut <= end)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  new SpaceRequest(id, requestingUser, checkIn, CheckOut, owner, available).then(() => {
+    res.render('confirmation')
+  }, (err) => {
+    res.redirect('/error')
+  })
+};
+
+User.register(firstName, surname, email, password, confirmPassword).then(() => {
+  res.redirect('/login')
+}, (err) => {
+  res.redirect('/error')
+})
+
 
 app.get('/register', (req, res) => {
   res.render('registration')

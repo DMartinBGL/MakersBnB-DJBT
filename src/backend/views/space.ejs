@@ -52,21 +52,66 @@
           <p class="availability">Available from <span class="start date"><%= space.startDate %></span> until <spa
               class="end date"><%= space.endDate %></span></p>
           <p class="description"><%= space.description %></p>
-          <p class="price">£<%= space.price %></p>
-          <div class="form-group col-md-6">
-            <label for="startdate" id="form-label">Check in:</label>
-            <input type="date" class="form-control" name="startdate">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="enddate" id="form-label">Checkout</label>
-            <input type="date" class="form-control" name="enddate">
-          </div>
-          <button type="submit" class="btn btn-primary btn-sml" id="form-button">Request</button>
+          <p class="price">£<%= space.price %> per night</p>
+
+          <form method="POST" action="/space/confirmation">
+            <div class="form-row">
+              <div class="col-md-6 form-group ">
+                <label for="checkIn" id="form-label">Check-in:</label>
+                <input type="date" class="form-control" name="checkIn">
+              </div>
+              <div class="col-md-6 form-group ">
+                <label for="checkout" id="form-label">Checkout:</label>
+                <input type="date" class="form-control" name="checkout">
+              </div>
+            </div>
+
+
+            <div class="form-row row-fluid">
+              <div class="form-group dropdown">
+                <button class="text-dark btn btn-secondary btn-lg dropdown-toggle form-group" type="button"
+                  id="dropdownMenuAdults" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Number of adults
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">1</a>
+                  <a class="dropdown-item" href="#">2</a>
+                  <a class="dropdown-item" href="#">3</a>
+                  <a class="dropdown-item" href="#">4</a>
+                  <a class="dropdown-item" href="#">5</a>
+                  <a class="dropdown-item" href="#">6</a>
+                  <a class="dropdown-item" href="#">7</a>
+                  <a class="dropdown-item" href="#">8</a>
+                  <a class="dropdown-item" href="#">9</a>
+                </div>
+              </div>
+              <div class="form-group dropdown">
+                <button class="text-dark btn btn-secondary btn-lg dropdown-toggle form-group" type=" button"
+                  id="dropdownMenuChildren" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Number of Children
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">1</a>
+                  <a class="dropdown-item" href="#">2</a>
+                  <a class="dropdown-item" href="#">3</a>
+                  <a class="dropdown-item" href="#">4</a>
+                  <a class="dropdown-item" href="#">5</a>
+                  <a class="dropdown-item" href="#">6</a>
+                  <a class="dropdown-item" href="#">7</a>
+                  <a class="dropdown-item" href="#">8</a>
+                  <a class="dropdown-item" href="#">9</a>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="form-button">Request</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
   </div>
+
+
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

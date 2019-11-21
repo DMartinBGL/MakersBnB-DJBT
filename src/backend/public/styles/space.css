@@ -44,3 +44,11 @@
 .description {
     font-size: 1.5em;
 }
+
+#dropdownMenuAdults {
+    background-color: white;
+}
+
+#dropdownMenuChildren {
+    background-color: white;
+}
