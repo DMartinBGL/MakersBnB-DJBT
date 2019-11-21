@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="/public/styles/style.css" />
   <link rel="stylesheet" type="text/css" href="/public/styles/index.css" />
   <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
-  <title>Hello, world!</title>
+  <title>Makers BnB</title>
 </head>
 
 <body>
@@ -79,16 +79,16 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-    <script>
-      $(document).ready(() => {
-        $(".space").on("click", (event) => {
-          const $space = $(event.target).closest(".space");
-          const id = $space.data("id");
+  <script>
+    $(document).ready(() => {
+      $(".space").on("click", (event) => {
+        const $space = $(event.target).closest(".space");
+        const id = $space.data("id");
 
-          window.location.href = "/space/" + id;
-        });
+        window.location.href = "/space/" + id;
       });
-    </script>
+    });
+  </script>
 </body>
 
 </html>

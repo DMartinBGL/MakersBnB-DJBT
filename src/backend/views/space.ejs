@@ -44,17 +44,28 @@
   <img class="img" src="/public/img/house.jpg" class="card-img-top" />
   <div id="content" class="container-fluid">
     <div id="space" class="row">
-        <div class="col-md-12 col-lg-8 offset-lg-2">
-            <div class="card">
-                <h5 class="title"><%= space.name %></h5>
-                <p class="owner"><%= space.owner %></p>
-                <p class="address"><%= space.address %></p>
-                <p class="availability">Available from <span class="start date"><%= space.startDate %></span> until <spa class="end date"><%= space.endDate %></span></p>
-                <p class="description"><%= space.description %></p>
-                <p class="price">£<%= space.price %></p>
-            </div>
+      <div class="col-md-12 col-lg-8 offset-lg-2">
+        <div class="card">
+          <h5 class="title"><%= space.name %></h5>
+          <p class="owner"><%= space.owner %></p>
+          <p class="address"><%= space.address %></p>
+          <p class="availability">Available from <span class="start date"><%= space.startDate %></span> until <spa
+              class="end date"><%= space.endDate %></span></p>
+          <p class="description"><%= space.description %></p>
+          <p class="price">£<%= space.price %></p>
+          <div class="form-group col-md-6">
+            <label for="startdate" id="form-label">Check in:</label>
+            <input type="date" class="form-control" name="startdate">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="enddate" id="form-label">Checkout</label>
+            <input type="date" class="form-control" name="enddate">
+          </div>
+          <button type="submit" class="btn btn-primary btn-sml" id="form-button">Request</button>
         </div>
+      </div>
     </div>
+  </div>
   </div>
 
   <!-- Optional JavaScript -->
