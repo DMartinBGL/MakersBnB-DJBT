@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const User = require('./User');
 const Space = require('./Space');
+const { verify } = require('./emailVerification');
+const { sendVerificationEmail } = require('./mailer')
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use('/public', express.static(__dirname + '/public'));
@@ -36,6 +38,7 @@ app.post('/register', (req, res) => {
   const confirmPassword = req.body.confirmpassword
 
   User.register(firstName, surname, email, password, confirmPassword).then(() => {
+    sendVerificationEmail(email);
     res.redirect('/login')
   }, (err) => {
     res.redirect('/error')
@@ -67,4 +70,13 @@ app.listen(8000, () => {
 
 app.get('/list', (req, res) => {
   res.render('list')
+  
+});
+
+app.get('/verify-email/:token', (req, res) => {
+  verify(req.params.token).then(() => { 
+    res.send("Email verified!")
+  }, (err) => { 
+    res.send("could not verify")
+  })
 });

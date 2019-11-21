@@ -14,8 +14,8 @@ async function verify(token) {
 
   if (data === undefined) throw new Error("Unable to verify");
 
-  query(`UPDATE User SET verified = 1 WHERE email = '${data.email}'`);
-  query(`DELETE FROM EmailVerification WHERE email = '${data.email}'`);
+  await query(`UPDATE User SET verified = 1 WHERE email = '${data.email}'`);
+  await query(`DELETE FROM EmailVerification WHERE email = '${data.email}'`);
 }
 
 module.exports = {
