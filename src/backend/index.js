@@ -67,7 +67,15 @@ app.post('/register', (req, res) => {
 })
 
 app.get('/error', (req, res) => {
-  res.render('error')
+  try {
+    user = JSON.parse(req.session.user)
+  } catch {
+    user;
+  }
+
+  res.render('error', {
+    user: user
+  });
 });
 
 app.get('/login', (req, res) => {
