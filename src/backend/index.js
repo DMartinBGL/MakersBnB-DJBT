@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session')
+const dateFormat = require('dateformat');
 const app = express();
 const path = require('path');
 const User = require('./User');
@@ -45,6 +46,13 @@ app.get('/space/:id', (req, res) => {
   }
 
   Space.getOne(req.params.id).then((space) => {
+
+    let startdate = dateFormat(space.startDate, "dd-mm-yyyy");
+    let enddate = dateFormat(space.endDate, "dd-mm-yyyy");
+
+    space.startDate = startdate;
+    space.endDate = enddate;
+
     if (space) res.render('space', {
       space: space,
       user: user
@@ -186,4 +194,27 @@ app.get('/list', (req, res) => {
   } else {
     res.redirect('/login')
   }
+});
+
+app.post('/list', (req, res) => {
+  const user = JSON.parse(req.session.user)
+  const title = req.body.title;
+  const description = req.body.description;
+  const address = req.body.address;
+  const startdate = req.body.startdate;
+  const enddate = req.body.enddate;
+  const price = req.body.price;
+  const owner = user["firstName"] + " " + user["lastName"]
+
+  let today = new Date()
+
+  let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+
+  Space.add(title, address, startdate, enddate, owner, true, date, description, price).then(() => {
+    res.redirect('/')
+  }, (err) => {
+    console.log(err)
+    res.redirect('/error')
+  })
 });
