@@ -163,6 +163,7 @@ app.get('/logout', (req, res) => {
       res.redirect('/')
     }
   });
+  res.redirect('/')
 });
 
 app.listen(PORT, () => {
