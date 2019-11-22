@@ -76,6 +76,24 @@ describe('User', () => {
         expect(error).toEqual("No letter(s)");
       })
     });
+
+    it('checks if a passwords match', () => {
+      let = passwordOne = "john12345"
+      let = passwordTwo = "john12346"
+
+      User.register(firstName, surname, email, passwordOne, passwordTwo).then(() => { }, (error) => {
+        expect(error).toEqual("Passwords do not match");
+      })
+    });
+
+    it('checks if any fields are empty', () => {
+      let = password = "john12345"
+      let = firstName = ""
+
+      User.register(firstName, surname, email, password, password).then(() => { }, (error) => {
+        expect(error).toEqual("You left a field empty");
+      })
+    });
   });
 
 });
