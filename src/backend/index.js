@@ -1,6 +1,8 @@
 const express = require('express');
 const session = require('express-session')
 const app = express();
+const https = require('https');
+const fs = require('fs');
 const path = require('path');
 const User = require('./User');
 const Space = require('./Space');
@@ -158,9 +160,18 @@ app.get('/logout', (req, res) => {
   res.redirect('/')
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}!`)
-});
+if (process.env.ENV === "production") {
+  https.createServer({
+    key: fs.readFileSync('/etc/letsencrypt/live/makers-project.xyz/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/makers-project.xyz/fullchain.pem')
+  }, app).listen(443);
+  console.log(`Serving HTTPS production on port 443`);
+} else {
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}!`);
+  });
+}
+
 
 app.get('/verify-email/:token', (req, res) => {
   verify(req.params.token).then(() => {
