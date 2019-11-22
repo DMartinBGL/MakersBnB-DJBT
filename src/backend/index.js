@@ -1,7 +1,5 @@
 const express = require('express');
 const session = require('express-session')
-const redis = require('redis')
-const redisStore = require('connect-redis')(session);
 const app = express();
 const path = require('path');
 const User = require('./User');
@@ -10,11 +8,9 @@ const DBhelper = require('./dbHelper')
 const SpaceRequest = require('./SpaceRequest')
 const { verify } = require('./emailVerification');
 const { sendVerificationEmail } = require('./mailer')
-const client = redis.createClient();
 
 const PORT = process.env.PORT || 8000;
 
-var user;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use('/public', express.static(__dirname + '/public'));
@@ -22,14 +18,12 @@ app.use(express.urlencoded());
 
 app.use(session({
   secret: '343ji43j4n3jn4jk3n',
-  store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl: 260 }),
-
   saveUninitialized: false,
   resave: false
 }))
 
 app.get('/', async (req, res) => {
-
+  let user;
   try {
     user = JSON.parse(req.session.user)
   } catch {
@@ -43,7 +37,7 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/space/:id', (req, res) => {
-
+  let user;
   try {
     user = JSON.parse(req.session.user)
   } catch {
@@ -89,7 +83,7 @@ app.post('/space/confirmation', async (req, res) => {
 });
 
 app.get('/register', (req, res) => {
-
+  let user;
   try {
     user = JSON.parse(req.session.user)
   } catch {
@@ -117,6 +111,7 @@ app.post('/register', (req, res) => {
 })
 
 app.get('/error', (req, res) => {
+  let user;
   try {
     user = JSON.parse(req.session.user)
   } catch {
@@ -129,6 +124,7 @@ app.get('/error', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+  let user;
   try {
     user = JSON.parse(req.session.user)
   } catch {
@@ -175,7 +171,7 @@ app.get('/verify-email/:token', (req, res) => {
 });
 
 app.get('/list', (req, res) => {
-  var user = req.session.user
+  let user = req.session.user
 
   if (user) {
     try {
