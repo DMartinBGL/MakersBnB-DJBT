@@ -1,6 +1,5 @@
 const crypto = require('crypto');
-const { authenticateQuery } = require('./dbHelper');
-const { registerQuery } = require('./dbHelper');
+const { authenticateQuery, registerQuery, query } = require('./dbHelper');
 var errorMessage;
 
 class User {
@@ -10,6 +9,14 @@ class User {
     this.lastName = lastName;
     this.email = email;
     this.verified = verified;
+  }
+
+  static async clear() {
+    const result = await query('DROP TABLE User');
+  }
+
+  static async init() {
+    const result = await query('CREATE TABLE User(id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), email VARCHAR(255), password VARCHAR(255), verified TINYINT(1))');
   }
 
   /*

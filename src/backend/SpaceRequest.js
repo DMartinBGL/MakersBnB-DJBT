@@ -1,15 +1,27 @@
 const { query } = require('./dbHelper');
 
+function makeDate(date) {
+  return new Date(date).toISOString().split("T")[0].toString();
+}
+
 class SpaceRequest {
   constructor(id, requestingUser, startDate, endDate, owner, status, spaceId) {
 
     this.id = id;
     this.requestingUser = requestingUser;
-    this.startDate = startDate;
-    this.endDate = endDate;
+    this.startDate = makeDate(startDate);
+    this.endDate = makeDate(endDate);
     this.owner = owner;
     this.status = status;
     this.spaceId = spaceId;
+  }
+
+  static async clear() {
+    const result = await query('DROP TABLE SpaceRequest');
+  }
+
+  static async init() {
+    const result = await query('CREATE TABLE SpaceRequest(id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, requestinguser INT, owner INT, status VARCHAR(255), startdate DATE, enddate DATE, spaceid INT(11))');
   }
 
   static async listAll() {
@@ -24,7 +36,7 @@ class SpaceRequest {
   static async add(requestingUser, startDate, endDate, owner, status, spaceId) {
     const result = await query(`INSERT INTO SpaceRequest( requestinguser, startdate, enddate, owner, status, spaceid) 
                         VALUES('${requestingUser}','${startDate}', '${endDate}', '${owner}', '${status}', ${spaceId})`);
-    return new SpaceRequest(result.insertId, requestingUser, startDate, endDate, owner, status, spaceId);
+    return new SpaceRequest(result.insertId, requestingUser,  startDate, endDate, owner, status, spaceId);
   }
 
   static async listByRequester(requestingUser) {
