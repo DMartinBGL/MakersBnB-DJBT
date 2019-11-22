@@ -165,7 +165,6 @@ app.get('/logout', (req, res) => {
       res.redirect('/')
     }
   });
-  res.redirect('/')
 });
 
 if (process.env.ENV === "production") {
