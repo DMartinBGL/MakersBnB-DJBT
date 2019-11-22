@@ -161,6 +161,14 @@ app.get('/logout', (req, res) => {
 });
 
 if (process.env.ENV === "production") {
+  app.use((req, res, next) => {
+    if(!req.secure) {
+      var secureUrl = "https://" + req.headers['host'] + req.url; 
+      res.writeHead(301, { "Location":  secureUrl });
+      res.end();
+    }
+  });
+
   https.createServer({
     key: fs.readFileSync('/etc/letsencrypt/live/makers-project.xyz/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/makers-project.xyz/fullchain.pem')
