@@ -41,8 +41,8 @@
       "src/**/*.js"
     ],
     "exclude": [
-        "**/*Spec.js",
-        "src/backend/index.js"
+      "**/*Spec.js",
+      "src/backend/index.js"
     ]
   }
 }
