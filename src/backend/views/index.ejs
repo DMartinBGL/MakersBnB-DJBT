@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="/public/styles/style.css" />
   <link rel="stylesheet" type="text/css" href="/public/styles/index.css" />
   <link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
-  <title>Hello, world!</title>
+  <title>Makers BnB</title>
 </head>
 
 <body>
@@ -102,27 +102,27 @@
         window.location.href = "/space/" + id;
       });
 
-      $("#space-search").on('input',() => {
-          const search = $('#space-search').val().split(" ");
-          $(".space").each( function() {
-            const closest = $( this ).text();
-            const terms = $.trim(closest).split(" ");
-            let matched = false;
-            search.forEach(word => { 
-              terms.forEach((v) => {
-                if((v.toLowerCase().indexOf(word.toLowerCase()))!= -1) {
-                  matched = true;
-                }
-              });
+      $("#space-search").on('input', () => {
+        const search = $('#space-search').val().split(" ");
+        $(".space").each(function () {
+          const closest = $(this).text();
+          const terms = $.trim(closest).split(" ");
+          let matched = false;
+          search.forEach(word => {
+            terms.forEach((v) => {
+              if ((v.toLowerCase().indexOf(word.toLowerCase())) != -1) {
+                matched = true;
+              }
             });
-            
-            if (matched) {
-             $( this ).parent().show();
-            } else {
-              $( this ).parent().hide();
-            }
-            
-          })
+          });
+
+          if (matched) {
+            $(this).parent().show();
+          } else {
+            $(this).parent().hide();
+          }
+
+        })
       });
 
     });
