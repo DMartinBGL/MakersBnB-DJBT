@@ -1,5 +1,7 @@
 const express = require('express');
 const session = require('express-session')
+const redis = require('redis')
+const redisStore = require('connect-redis')(session);
 const app = express();
 const path = require('path');
 const User = require('./User');
@@ -8,6 +10,7 @@ const DBhelper = require('./dbHelper')
 const SpaceRequest = require('./SpaceRequest')
 const { verify } = require('./emailVerification');
 const { sendVerificationEmail } = require('./mailer')
+const client = redis.createClient();
 
 const PORT = process.env.PORT || 8000;
 
@@ -19,6 +22,8 @@ app.use(express.urlencoded());
 
 app.use(session({
   secret: '343ji43j4n3jn4jk3n',
+  store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl: 260 }),
+
   saveUninitialized: false,
   resave: false
 }))
@@ -147,7 +152,13 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-  req.session.user = null;
+  req.session.destroy(function (err) {
+    if (err) {
+      res.redirect('/error')
+    } else {
+      res.redirect('/')
+    }
+  });
   res.redirect('/')
 });
 
