@@ -12,6 +12,14 @@ class SpaceRequest {
     this.spaceId = spaceId;
   }
 
+  static async clear() {
+    const result = await query('DROP TABLE SpaceRequest');
+  }
+
+  static async init() {
+    const result = await query('CREATE TABLE SpaceRequest(id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, requestinguser VARCHAR(255), owner VARCHAR(255), status VARCHAR(255), startdate DATE, enddate DATE, spaceid INT(11))');
+  }
+
   static async listAll() {
     let list = [];
     const result = await query('SELECT * FROM SpaceRequest');

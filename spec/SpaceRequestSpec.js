@@ -35,13 +35,18 @@ describe('SpaceRequest', () => {
     it('shows you who the owner is', () => {
       expect(spaceRequest.owner).toBe(owner);
     });
+  });
 
-    it('tells you if the location is available', () => {
-      expect(spaceRequest.available).toBe(available);
+  describe('Database methods', () => {
+  
+    beforeEach(() => {
+      SpaceRequest.clear();
+      SpaceRequest.init();
     });
 
-    it('shows when the advert was created', () => {
-      expect(spaceRequest.dateCreated).toBe(dateCreated);
+    it('list initially empty', async () => {
+      const list = await SpaceRequest.listAll();
+      expect(list.length).toBe(0)
     });
   });
 });
