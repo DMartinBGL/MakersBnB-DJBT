@@ -18,7 +18,9 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(express.urlencoded());
 
 app.use(session({
-  'secret': '343ji43j4n3jn4jk3n'
+  secret: '343ji43j4n3jn4jk3n',
+  saveUninitialized: false,
+  resave: false
 }))
 
 app.get('/', async (req, res) => {
