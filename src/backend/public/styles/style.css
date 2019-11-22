@@ -1,8 +1,15 @@
 #usertext{
   color: white;
 }
-
-#center{
+#navtitle{
+  font-family: 'Pacifico', cursive !important;
+  color: white;
+  font-size: 25px;
+}
+#navtitle-center{
+  font-family: 'Pacifico', cursive !important;
+  color: white;
+  font-size: 25px;
   margin: auto;
 }
 
