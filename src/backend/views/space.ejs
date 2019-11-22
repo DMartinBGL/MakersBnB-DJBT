@@ -78,43 +78,18 @@
                 <label for="checkout" id="form-label">Checkout:</label>
                 <input type="date" class="form-control" name="checkout">
               </div>
-              <div class="form-row row-fluid">
-                <div class="form-group dropdown">
-                  <button class="text-dark btn btn-secondary btn-lg dropdown-toggle form-group" type="button"
-                    id="dropdownMenuAdult" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Number of adults
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">1</a>
-                    <a class="dropdown-item" href="#">2</a>
-                    <a class="dropdown-item" href="#">3</a>
-                    <a class="dropdown-item" href="#">4</a>
-                    <a class="dropdown-item" href="#">5</a>
-                    <a class="dropdown-item" href="#">6</a>
-                    <a class="dropdown-item" href="#">7</a>
-                    <a class="dropdown-item" href="#">8</a>
-                    <a class="dropdown-item" href="#">9</a>
-                  </div>
-                </div>
-                <div class="form-group dropdown">
-                  <button class="text-dark btn btn-secondary btn-lg dropdown-toggle form-group" type=" button"
-                    id="dropdownMenuChildren" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Number of Children
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">1</a>
-                    <a class="dropdown-item" href="#">2</a>
-                    <a class="dropdown-item" href="#">3</a>
-                    <a class="dropdown-item" href="#">4</a>
-                    <a class="dropdown-item" href="#">5</a>
-                    <a class="dropdown-item" href="#">6</a>
-                    <a class="dropdown-item" href="#">7</a>
-                    <a class="dropdown-item" href="#">8</a>
-                    <a class="dropdown-item" href="#">9</a>
-                  </div>
-                  <br><button type="submit" class="btn btn-primary" id="form-button">Request</button>
-                </div>
+            </div>
+            <div class="form-row row-fluid">
+              <div class="dropdown col-md-6 form-group ">
+                <label for="adults" id="form-label">Number of adults:</label>
+                <input type="number" min="0" class="form-control" name="adults">
               </div>
+              <div class="dropdown col-md-6 form-group ">
+                <label for="children" id="form-label">Number of children:</label>
+                <input type="number" min="0" class="form-control" name="children">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="form-button">Request</button>
           </form>
         </div>
       </div>

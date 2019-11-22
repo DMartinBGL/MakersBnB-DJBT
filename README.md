@@ -6,11 +6,11 @@ Working as a team of 4, we are creating a BnB web app that allows users to list 
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
 ### Installing
+
+Run npm install, and then npm start to start the server.
+
+Alternatively you can go to "makers-project.xyz".
 
 ## User Story's
 Users should be able to name their space, provide a short description of the space, and a price per night.
@@ -28,7 +28,7 @@ Users should be able to offer a range of dates where their space is available.
 
 ## Running the tests
 
-Load the SpecRunner.html file to run the tests
+Run "npm test" to see the test coverage.
 
 ## Authors
 
