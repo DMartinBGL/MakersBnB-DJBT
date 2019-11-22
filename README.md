@@ -28,7 +28,7 @@ Users should be able to offer a range of dates where their space is available.
 
 ## Running the tests
 
-Load the SpecRunner.html file to run the tests
+Run "npm test" to see the test coverage.
 
 ## Authors
 
