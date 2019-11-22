@@ -68,7 +68,7 @@ app.get('/space/:id', (req, res) => {
 
 app.post('/space/confirmation', async (req, res) => {
 
-  const result = await DBhelper.query(`SELECT * FROM Space WHERE startdate = '${req.body.checkIn}'`);
+  const result = await DBhelper.query(`SELECT * FROM Space WHERE '${req.body.checkIn}' BETWEEN startdate AND enddate`);
 
   const id = result[0].id;
   const requestingUser = "guest"
@@ -169,9 +169,9 @@ app.get('/logout', (req, res) => {
 
 if (process.env.ENV === "production") {
   app.use((req, res, next) => {
-    if(!req.secure) {
-      var secureUrl = "https://" + req.headers['host'] + req.url; 
-      res.writeHead(301, { "Location":  secureUrl });
+    if (!req.secure) {
+      var secureUrl = "https://" + req.headers['host'] + req.url;
+      res.writeHead(301, { "Location": secureUrl });
       res.end();
     }
   });
