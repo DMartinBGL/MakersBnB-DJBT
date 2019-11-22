@@ -36,7 +36,7 @@ class SpaceRequest {
   static async add(requestingUser, startDate, endDate, owner, status, spaceId) {
     const result = await query(`INSERT INTO SpaceRequest( requestinguser, startdate, enddate, owner, status, spaceid) 
                         VALUES('${requestingUser}','${startDate}', '${endDate}', '${owner}', '${status}', ${spaceId})`);
-    return new SpaceRequest(result.insertId, requestingUser,  startDate, endDate, owner, status, spaceId);
+    return new SpaceRequest(result.insertId, requestingUser, startDate, endDate, owner, status, spaceId);
   }
 
   static async listByRequester(requestingUser) {
@@ -62,7 +62,13 @@ class SpaceRequest {
   }
 
   static async createRequest(id, requestingUser, checkIn, CheckOut, owner, available) {
-    return new SpaceRequest(id, requestingUser, checkIn, CheckOut, owner, available)
+
+    if (available === true) {
+      return new SpaceRequest(id, requestingUser, checkIn, CheckOut, owner, available)
+    } else {
+      throw ("error")
+    }
+
   };
 }
 

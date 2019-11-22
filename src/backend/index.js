@@ -75,15 +75,21 @@ app.post('/space/confirmation', async (req, res) => {
   const checkIn = req.body.checkIn
   const checkOut = req.body.checkout
   const owner = result[0].owner
-  const available = checkAvailable(checkIn, checkOut, result[0].startDate, result[0].endDate)
+  const available = checkAvailable(checkIn, checkOut, result[0].startdate, result[0].enddate)
 
   function checkAvailable(checkIn, checkOut, start, end) {
-    if ((start <= checkIn <= end) && (start <= checkOut <= end)) {
+    let currentDate = new Date().toJSON().slice(0, 10);
+
+    let startdate = JSON.stringify(start).slice(1, 11)
+    let enddate = JSON.stringify(end).slice(1, 11)
+
+    if ((checkIn >= currentDate) && (checkIn >= startdate) && (checkIn < enddate) && (checkOut <= enddate) && (checkOut >= currentDate) && (checkOut > checkIn)) {
       return true;
     } else {
       return false;
     }
   };
+
 
   SpaceRequest.createRequest(id, requestingUser, checkIn, checkOut, owner, available).then(() => {
     res.render('confirmation')
