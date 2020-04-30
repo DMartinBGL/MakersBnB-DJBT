@@ -29,7 +29,7 @@
     "ejs": "^2.7.4",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mdbootstrap": "^4.9.0",
     "mysql": "^2.17.1",
     "redis": "^2.8.0"
